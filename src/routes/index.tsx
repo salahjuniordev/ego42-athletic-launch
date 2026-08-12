@@ -31,7 +31,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background">
+    <main className="relative flex h-screen min-h-[600px] flex-col overflow-hidden bg-background">
       {/* Header */}
       <header className="relative z-40 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-5 pt-5 sm:px-8">
         <a href="#" className="flex min-w-0 items-center gap-2 sm:gap-3">
@@ -86,7 +86,7 @@ function Index() {
       )}
 
       {/* Hero */}
-      <section className="relative flex min-h-[78vh] items-center justify-center px-5 sm:px-8 lg:min-h-[72vh]">
+      <section className="relative flex min-h-0 flex-1 items-center justify-center px-5 pb-40 sm:px-8 sm:pb-32">
         {/* Background wordmark */}
         <h1 className="pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2 select-none text-center font-display text-[24vw] font-black uppercase leading-none tracking-tighter text-foreground">
           EGO 42
@@ -105,12 +105,12 @@ function Index() {
           alt="Sprinter athlete in explosive starting stride"
           width={1024}
           height={1536}
-          className="relative z-20 h-[62vh] w-auto max-w-none object-contain drop-shadow-2xl transition-transform duration-700 ease-out hover:scale-[1.03] lg:h-[78vh]"
+          className="relative z-20 h-full max-h-full w-auto max-w-none object-contain drop-shadow-2xl transition-transform duration-700 ease-out hover:scale-[1.03]"
         />
       </section>
 
       {/* Hero copy */}
-      <div className="relative z-30 max-w-xl px-5 pb-16 sm:px-8 lg:absolute lg:bottom-16 lg:left-8 lg:pb-0">
+      <div className="absolute bottom-8 left-5 z-30 max-w-md sm:bottom-12 sm:left-8 sm:max-w-lg">
         <p className="text-base leading-relaxed text-muted-foreground">
           Push beyond your limits. Train harder, run faster, and conquer your goals with EGO 42 —
           performance programming for athletes who refuse to settle.
