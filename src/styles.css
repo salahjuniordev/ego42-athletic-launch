@@ -148,3 +148,41 @@
     color: var(--color-foreground);
   }
 }
+
+@utility texture-dark {
+  background-image:
+    radial-gradient(
+      ellipse at 20% 0%,
+      color-mix(in oklab, var(--primary) 18%, transparent),
+      transparent 55%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      oklch(1 0 0 / 3%) 0px,
+      oklch(1 0 0 / 3%) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+}
+
+@utility red-glow {
+  box-shadow: var(--shadow-red);
+}
+
+@utility section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--primary);
+
+  &::before {
+    content: "";
+    width: 2.25rem;
+    height: 2px;
+    background: var(--primary);
+  }
+}
