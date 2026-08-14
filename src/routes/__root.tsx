@@ -77,19 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EGO 42 — Elite Athletic Training" },
+      { title: "EGO 42 — Performance Humaine" },
       {
         name: "description",
         content:
-          "EGO 42 builds faster, stronger athletes. Elite speed, strength and endurance programs led by high-performance coaches.",
+          "EGO 42 — coaching sportif, natation, préparation physique, mobilité et performance au Cameroun.",
       },
       { name: "author", content: "EGO 42" },
-      { property: "og:title", content: "EGO 42 — Elite Athletic Training" },
+      { property: "og:title", content: "EGO 42 — Performance Humaine" },
       {
         property: "og:description",
-        content: "Push beyond your limits. Train harder, run faster, conquer your goals.",
+        content: "Discipline. Performance. Potentiel humain.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "EGO 42" },
+      { property: "og:locale", content: "fr_FR" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
     ],
@@ -103,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700..900;1,700..900&family=Barlow:ital,wght@0,400;0,500;0,700;1,700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap",
       },
     ],
   }),
