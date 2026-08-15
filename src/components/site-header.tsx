@@ -4,12 +4,12 @@ import { Menu, X as XIcon } from "lucide-react";
 import mark from "@/assets/ego42-mark.png.asset.json";
 
 export const navLinks = [
-  { label: "À propos", href: "#apropos" },
-  { label: "Services", href: "#services" },
-  { label: "Programmes", href: "#programmes" },
-  { label: "Tarifs", href: "#tarifs" },
-  { label: "Méthode", href: "#methode" },
-  { label: "Contact", href: "#contact" },
+  { label: "Accueil", href: "/" },
+  { label: "À propos", href: "/#apropos" },
+  { label: "Services", href: "/services" },
+  { label: "Programmes", href: "/#programmes" },
+  { label: "Tarifs", href: "/#tarifs" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function SiteHeader() {
@@ -18,7 +18,7 @@ export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-5 pt-5 sm:px-8">
-        <a href="#hero" className="flex min-w-0 items-center gap-2 sm:gap-3">
+        <a href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
           <img
             src={mark.url}
             alt="EGO 42 running figure logo"

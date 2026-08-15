@@ -3,7 +3,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ServiceDetail } from "@/components/service-detail";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getService, services } from "@/lib/services-data";
+import { getService } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -45,5 +45,3 @@ function ServicePage() {
     </div>
   );
 }
-
-export const serviceSlugs = services.map((s) => s.slug);
