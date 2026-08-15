@@ -5,7 +5,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border py-10">
       <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center">
-        <a href="#hero" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           <img
             src={mark.url}
             alt="EGO 42 logo"
