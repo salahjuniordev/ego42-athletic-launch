@@ -4,10 +4,12 @@ import { Menu, X as XIcon } from "lucide-react";
 import mark from "@/assets/ego42-mark.png.asset.json";
 
 export const navLinks = [
-  { label: "Home", href: "#hero" },
-  { label: "Programs", href: "#programs" },
-  { label: "Trainers", href: "#coaches" },
-  { label: "Contact", href: "#join" },
+  { label: "À propos", href: "#apropos" },
+  { label: "Services", href: "#services" },
+  { label: "Programmes", href: "#programmes" },
+  { label: "Tarifs", href: "#tarifs" },
+  { label: "Méthode", href: "#methode" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function SiteHeader() {
