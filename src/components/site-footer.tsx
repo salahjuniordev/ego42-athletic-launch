@@ -1,5 +1,3 @@
-import { Instagram, Youtube, X as XIcon } from "lucide-react";
-
 import mark from "@/assets/ego42-mark.png.asset.json";
 import { navLinks } from "./site-header";
 
@@ -21,7 +19,7 @@ export function SiteFooter() {
           </span>
         </a>
 
-        <nav className="flex flex-wrap gap-x-8 gap-y-3 lg:justify-center">
+        <nav className="flex flex-wrap gap-x-8 gap-y-3 lg:col-span-2 lg:justify-end">
           {navLinks.map((l) => (
             <a
               key={l.label}
@@ -31,39 +29,10 @@ export function SiteFooter() {
               {l.label}
             </a>
           ))}
-          <a
-            href="#"
-            className="text-sm text-muted-foreground transition-colors duration-300 hover:text-primary"
-          >
-            Terms of Service
-          </a>
-          <a
-            href="#"
-            className="text-sm text-muted-foreground transition-colors duration-300 hover:text-primary"
-          >
-            Privacy
-          </a>
         </nav>
-
-        <div className="flex items-center gap-5 lg:justify-end">
-          {[
-            { Icon: Instagram, label: "Instagram" },
-            { Icon: XIcon, label: "X" },
-            { Icon: Youtube, label: "YouTube" },
-          ].map(({ Icon, label }) => (
-            <a
-              key={label}
-              href="#"
-              aria-label={label}
-              className="text-muted-foreground transition-colors duration-300 hover:text-primary"
-            >
-              <Icon size={17} />
-            </a>
-          ))}
-        </div>
       </div>
       <p className="mt-8 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} EGO 42. All rights reserved.
+        © {new Date().getFullYear()} EGO 42 — Coaching sportif & préparation physique, Cameroun.
       </p>
     </footer>
   );

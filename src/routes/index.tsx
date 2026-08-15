@@ -2,28 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
-import { Philosophy } from "@/components/philosophy";
+import { BrandStatement } from "@/components/brand-statement";
+import { Services } from "@/components/services";
 import { Programs } from "@/components/programs";
-import { Coaches } from "@/components/coaches";
-import { Testimonials } from "@/components/testimonials";
-import { Gear } from "@/components/gear";
-import { JoinCta } from "@/components/join-cta";
+import { Pricing } from "@/components/pricing";
+import { Method } from "@/components/method";
+import { ContactCta } from "@/components/contact-cta";
 import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EGO 42 — Push Beyond Your Limits" },
+      { title: "EGO 42 — Coaching & préparation physique" },
       {
         name: "description",
         content:
-          "EGO 42 athletic training: sprint, strength and endurance programs, elite coaches and premium gear for athletes who refuse to slow down.",
+          "EGO 42 : coaching sportif et préparation physique au Cameroun — natation, renforcement, mobilité et performance pour enfants, adolescents, adultes et athlètes.",
       },
-      { property: "og:title", content: "EGO 42 — Push Beyond Your Limits" },
+      { property: "og:title", content: "EGO 42 — Coaching & préparation physique" },
       {
         property: "og:description",
-        content: "Train harder, run faster, conquer your goals with EGO 42.",
+        content:
+          "Coaching sportif et préparation physique en piscine et à sec, pour tous les âges et tous les niveaux.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -34,12 +37,12 @@ function Index() {
     <div className="relative min-h-screen overflow-x-hidden bg-background">
       <SiteHeader />
       <Hero />
-      <Philosophy />
+      <BrandStatement />
+      <Services />
       <Programs />
-      <Coaches />
-      <Testimonials />
-      <Gear />
-      <JoinCta />
+      <Pricing />
+      <Method />
+      <ContactCta />
       <SiteFooter />
     </div>
   );
