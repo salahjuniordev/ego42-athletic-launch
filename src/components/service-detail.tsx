@@ -1,11 +1,17 @@
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
+import { ServiceInquiry } from "@/components/service-inquiry";
 import type { Service } from "@/lib/services-data";
-import { services } from "@/lib/services-data";
+import { getRelatedServices } from "@/lib/services-data";
+
+const btnPrimary =
+  "inline-flex items-center gap-3 bg-primary px-8 py-4 font-display text-base font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-all duration-300 hover:bg-primary-glow hover:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+const btnGhost =
+  "inline-flex items-center gap-3 border border-border px-8 py-4 font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground transition-all duration-300 hover:border-primary hover:text-primary hover:gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 export function ServiceDetail({ service }: { service: Service }) {
-  const others = services.filter((s) => s.slug !== service.slug);
+  const related = getRelatedServices(service.slug);
 
   return (
     <>
@@ -95,43 +101,73 @@ export function ServiceDetail({ service }: { service: Service }) {
           <div className="mt-14 flex flex-wrap gap-4">
             <a
               href="/#tarifs"
-              className="inline-flex items-center gap-3 bg-primary px-8 py-4 font-display text-base font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-300 hover:bg-primary-glow"
+              data-analytics-id="service-cta-pricing"
+              data-service={service.slug}
+              className={btnPrimary}
             >
               Voir les tarifs
               <ArrowRight size={20} />
             </a>
             <a
-              href="/#contact"
-              className="inline-flex items-center gap-3 border border-border px-8 py-4 font-display text-base font-semibold uppercase tracking-[0.14em] text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
+              href="#demande"
+              data-analytics-id="service-cta-inquiry"
+              data-service={service.slug}
+              className={btnGhost}
             >
-              Nous contacter
+              Demander une séance
             </a>
           </div>
         </div>
       </section>
 
+      <ServiceInquiry serviceSlug={service.slug} />
+
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <span className="section-label">Autres services</span>
-          <ul className="mt-10 divide-y divide-border border-y border-border">
-            {others.map((o) => (
-              <li key={o.slug}>
-                <Link
-                  to="/services/$slug"
-                  params={{ slug: o.slug }}
-                  className="group grid gap-2 py-7 transition-colors duration-300 hover:bg-card/50 sm:grid-cols-[minmax(0,4rem)_minmax(0,1fr)_auto] sm:items-baseline sm:gap-8 sm:px-2"
-                >
+          <span className="section-label">Services liés</span>
+          <h2 className="mt-6 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl">
+            À combiner <span className="text-primary">avec</span>
+          </h2>
+
+          <div className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
+            {related.map((o) => (
+              <Link
+                key={o.slug}
+                to="/services/$slug"
+                params={{ slug: o.slug }}
+                data-analytics-id="service-related-link"
+                data-service={service.slug}
+                data-target-service={o.slug}
+                className="group flex flex-col bg-background"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={o.img}
+                    alt={o.alt}
+                    width={1200}
+                    height={800}
+                    loading="lazy"
+                    className="aspect-[3/2] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6 sm:p-8">
                   <span className="font-display text-sm font-semibold tracking-[0.2em] text-primary">
                     {o.n}
                   </span>
-                  <span className="font-display text-2xl font-bold uppercase tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-3xl">
+                  <h3 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-3xl">
                     {o.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {o.cardCopy}
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.16em] text-primary transition-all duration-300 group-hover:gap-4">
+                    Découvrir
+                    <ArrowRight size={16} />
                   </span>
-                  <ArrowRight size={20} className="text-primary" />
-                </Link>
-              </li>
+                </div>
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
     </>
