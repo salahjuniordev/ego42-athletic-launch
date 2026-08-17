@@ -5,9 +5,9 @@ import mark from "@/assets/ego42-mark.png.asset.json";
 
 export const navLinks = [
   { label: "Accueil", href: "/" },
-  { label: "À propos", href: "/#apropos" },
+  { label: "À propos", href: "/a-propos" },
   { label: "Services", href: "/services" },
-  { label: "Programmes", href: "/#programmes" },
+  { label: "Programmes", href: "/programmes" },
   { label: "Tarifs", href: "/#tarifs" },
   { label: "Contact", href: "/#contact" },
 ];
