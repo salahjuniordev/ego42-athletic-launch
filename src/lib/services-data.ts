@@ -180,3 +180,18 @@ export const services: Service[] = [
 export function getService(slug: string) {
   return services.find((s) => s.slug === slug);
 }
+
+/** Two most relevant sibling services per service. */
+export const relatedSlugs: Record<string, string[]> = {
+  natation: ["performance", "coaching-personnalise"],
+  fitness: ["mobilite-bien-etre", "performance"],
+  "mobilite-bien-etre": ["fitness", "coaching-personnalise"],
+  performance: ["fitness", "natation"],
+  "coaching-personnalise": ["fitness", "natation"],
+};
+
+export function getRelatedServices(slug: string): Service[] {
+  return (relatedSlugs[slug] ?? [])
+    .map((s) => getService(s))
+    .filter((s): s is Service => Boolean(s));
+}

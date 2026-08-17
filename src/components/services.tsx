@@ -5,6 +5,7 @@ import { services as allServices } from "@/lib/services-data";
 
 const cards = allServices.slice(0, 3);
 const wide = allServices.slice(3);
+const feature = wide[1] ?? wide[0] ?? allServices[0]!;
 
 export function Services() {
   return (
@@ -63,8 +64,8 @@ export function Services() {
         <div className="mt-px grid gap-px border border-t-0 border-border bg-border lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div className="relative overflow-hidden bg-background">
             <img
-              src={wide[1].img}
-              alt={wide[1].alt}
+              src={feature.img}
+              alt={feature.alt}
               width={1600}
               height={1008}
               loading="lazy"
