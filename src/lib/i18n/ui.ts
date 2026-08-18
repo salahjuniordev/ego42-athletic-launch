@@ -327,6 +327,19 @@ const en: typeof fr = {
     poolCta: "Request a quote",
   },
 
+  servicePricing: {
+    label: "Pricing",
+    titleTop: "Pricing for",
+    titleAccent: "this service",
+    intro: (service: string) =>
+      `The rates below apply to ${service} sessions, as a monthly membership or per session.`,
+    monthlyTitle: "Monthly membership",
+    sessionTitle: "Per session",
+    note: "One-on-one or small-group formats. At-home sessions available depending on distance.",
+    ctaAll: "See all pricing",
+    ctaInquiry: "Request a session",
+  },
+
   contact: {
     label: "Contact",
     titleTop: "Ready to move",
