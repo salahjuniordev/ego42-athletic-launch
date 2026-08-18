@@ -111,6 +111,19 @@ const fr = {
     poolCta: "Demander un devis",
   },
 
+  servicePricing: {
+    label: "Tarifs",
+    titleTop: "Tarifs",
+    titleAccent: "de ce service",
+    intro: (service: string) =>
+      `Les tarifs ci-dessous s'appliquent aux séances de ${service}, en abonnement mensuel ou à la séance.`,
+    monthlyTitle: "Abonnement mensuel",
+    sessionTitle: "À la séance",
+    note: "Formules individuelles ou en petit groupe. Déplacement à domicile possible selon la distance.",
+    ctaAll: "Voir tous les tarifs",
+    ctaInquiry: "Demander une séance",
+  },
+
   contact: {
     label: "Contact",
     titleTop: "Prêt à bouger",
