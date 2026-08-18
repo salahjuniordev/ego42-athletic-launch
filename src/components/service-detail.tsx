@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 import { ServiceInquiry } from "@/components/service-inquiry";
+import { ServicePricing } from "@/components/service-pricing";
 import { useLang, useT } from "@/lib/i18n/context";
 import type { ServiceRaw } from "@/lib/services-data";
 import { getRelatedServices, localizeService } from "@/lib/services-data";
@@ -107,7 +108,7 @@ export function ServiceDetail({ service }: { service: ServiceRaw }) {
 
           <div className="mt-14 flex flex-wrap gap-4">
             <a
-              href="/#tarifs"
+              href="#tarifs"
               data-analytics-id="service-cta-pricing"
               data-service={service.slug}
               className={btnPrimary}
@@ -126,6 +127,8 @@ export function ServiceDetail({ service }: { service: ServiceRaw }) {
           </div>
         </div>
       </section>
+
+      <ServicePricing serviceSlug={service.slug} serviceTitle={s.title} />
 
       <ServiceInquiry serviceSlug={service.slug} />
 
