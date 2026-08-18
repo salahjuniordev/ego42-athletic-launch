@@ -111,6 +111,19 @@ const fr = {
     poolCta: "Demander un devis",
   },
 
+  servicePricing: {
+    label: "Tarifs",
+    titleTop: "Tarifs",
+    titleAccent: "de ce service",
+    intro: (service: string) =>
+      `Les tarifs ci-dessous s'appliquent aux séances de ${service}, en abonnement mensuel ou à la séance.`,
+    monthlyTitle: "Abonnement mensuel",
+    sessionTitle: "À la séance",
+    note: "Formules individuelles ou en petit groupe. Déplacement à domicile possible selon la distance.",
+    ctaAll: "Voir tous les tarifs",
+    ctaInquiry: "Demander une séance",
+  },
+
   contact: {
     label: "Contact",
     titleTop: "Prêt à bouger",
@@ -312,6 +325,19 @@ const en: typeof fr = {
     poolTitle: "Home pool maintenance",
     poolBody: "Rate negotiable by distance. We put together a proposal after discussing the location and how often you need us.",
     poolCta: "Request a quote",
+  },
+
+  servicePricing: {
+    label: "Pricing",
+    titleTop: "Pricing for",
+    titleAccent: "this service",
+    intro: (service: string) =>
+      `The rates below apply to ${service} sessions, as a monthly membership or per session.`,
+    monthlyTitle: "Monthly membership",
+    sessionTitle: "Per session",
+    note: "One-on-one or small-group formats. At-home sessions available depending on distance.",
+    ctaAll: "See all pricing",
+    ctaInquiry: "Request a session",
   },
 
   contact: {

@@ -5,7 +5,7 @@ import { LANG_COOKIE, normalizeLang, type Lang } from "./config";
 
 function readClientCookie(name: string): string | undefined {
   const match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
-  return match ? decodeURIComponent(match[1]) : undefined;
+  return match ? decodeURIComponent(match[1] ?? "") : undefined;
 }
 
 /**
