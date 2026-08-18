@@ -2,18 +2,22 @@ import { useState } from "react";
 import { Menu, X as XIcon } from "lucide-react";
 
 import mark from "@/assets/ego42-mark.png.asset.json";
+import { useT } from "@/lib/i18n/context";
+import { LanguageToggle } from "@/components/language-toggle";
 
+/** Nav entries are language-independent; labels resolve via `t.nav[key]`. */
 export const navLinks = [
-  { label: "Accueil", href: "/" },
-  { label: "À propos", href: "/a-propos" },
-  { label: "Services", href: "/services" },
-  { label: "Programmes", href: "/programmes" },
-  { label: "Tarifs", href: "/#tarifs" },
-  { label: "Contact", href: "/#contact" },
-];
+  { key: "home", href: "/" },
+  { key: "about", href: "/a-propos" },
+  { key: "services", href: "/services" },
+  { key: "programs", href: "/programmes" },
+  { key: "pricing", href: "/#tarifs" },
+  { key: "contact", href: "/#contact" },
+] as const;
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = useT();
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -21,7 +25,7 @@ export function SiteHeader() {
         <a href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
           <img
             src={mark.url}
-            alt="EGO 42 running figure logo"
+            alt={t.header.logoAlt}
             width={48}
             height={48}
             className="h-9 w-9 shrink-0 object-contain sm:h-12 sm:w-12"
@@ -31,21 +35,22 @@ export function SiteHeader() {
           </span>
         </a>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <nav className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.href}
                 href={link.href}
                 className="text-sm font-medium tracking-wide text-foreground/90 transition-colors duration-300 hover:text-primary"
               >
-                {link.label}
+                {t.nav[link.key]}
               </a>
             ))}
           </nav>
+          <LanguageToggle />
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
             className="-mt-5 -mr-5 grid h-14 w-14 shrink-0 place-items-center bg-primary text-primary-foreground transition-colors duration-300 hover:bg-primary-glow sm:-mr-8 sm:h-20 sm:w-20"
@@ -57,14 +62,17 @@ export function SiteHeader() {
 
       {menuOpen && (
         <nav className="mt-4 flex flex-col gap-1 border-y border-border bg-card/90 px-5 py-4 backdrop-blur md:hidden">
+          <div className="pb-2">
+            <LanguageToggle />
+          </div>
           {navLinks.map((link) => (
             <a
-              key={link.label}
+              key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
               className="py-2 font-display text-lg font-bold uppercase italic text-foreground transition-colors hover:text-primary"
             >
-              {link.label}
+              {t.nav[link.key]}
             </a>
           ))}
         </nav>

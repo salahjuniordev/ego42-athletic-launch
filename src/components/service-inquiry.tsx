@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 
-import { services } from "@/lib/services-data";
+import { useLang, useT } from "@/lib/i18n/context";
+import { getServices } from "@/lib/services-data";
 
 export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
+  const lang = useLang();
+  const t = useT().inquiry;
   const [service, setService] = useState(serviceSlug);
   const [sent, setSent] = useState(false);
+
+  const localizedServices = getServices(lang);
 
   const field =
     "w-full border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground focus:border-primary";
@@ -15,11 +20,10 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "");
+    const serviceTitle = localizedServices.find((s) => s.slug === service)?.title ?? service;
     setSent(true);
-    toast.success("Demande envoyée", {
-      description: `Merci ${name || ""}, nous revenons vers vous rapidement au sujet de « ${
-        services.find((s) => s.slug === service)?.title ?? service
-      } ».`,
+    toast.success(t.toastTitle, {
+      description: t.toastDescription(name || "", serviceTitle),
     });
     e.currentTarget.reset();
     setService(serviceSlug);
@@ -30,17 +34,14 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <span className="section-label">Demande</span>
+            <span className="section-label">{t.label}</span>
             <h2 className="mt-6 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl">
-              Réserver une <span className="text-primary">séance</span>
+              {t.titleTop} <span className="text-primary">{t.titleAccent}</span>
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
-              Précisez votre niveau et votre objectif : nous vous proposons la formule adaptée et
-              planifions la première séance.
-            </p>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">{t.intro}</p>
             {sent ? (
               <p className="mt-6 font-display text-sm font-semibold uppercase tracking-[0.16em] text-primary">
-                Demande enregistrée
+                {t.sent}
               </p>
             ) : null}
           </div>
@@ -54,18 +55,23 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Nom
+                  {t.nameLabel}
                 </span>
-                <input name="name" required placeholder="Votre nom" className={`mt-2 ${field}`} />
+                <input
+                  name="name"
+                  required
+                  placeholder={t.namePlaceholder}
+                  className={`mt-2 ${field}`}
+                />
               </label>
               <label className="block">
                 <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                  Téléphone
+                  {t.phoneLabel}
                 </span>
                 <input
                   name="phone"
                   required
-                  placeholder="+237 ..."
+                  placeholder={t.phonePlaceholder}
                   className={`mt-2 ${field}`}
                 />
               </label>
@@ -73,20 +79,20 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
 
             <label className="block">
               <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                E-mail
+                {t.emailLabel}
               </span>
               <input
                 name="email"
                 type="email"
                 required
-                placeholder="vous@exemple.com"
+                placeholder={t.emailPlaceholder}
                 className={`mt-2 ${field}`}
               />
             </label>
 
             <label className="block">
               <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Service souhaité
+                {t.serviceLabel}
               </span>
               <select
                 name="service"
@@ -94,7 +100,7 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
                 onChange={(e) => setService(e.target.value)}
                 className={`mt-2 ${field}`}
               >
-                {services.map((s) => (
+                {localizedServices.map((s) => (
                   <option key={s.slug} value={s.slug}>
                     {s.title}
                   </option>
@@ -104,12 +110,12 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
 
             <label className="block">
               <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Message
+                {t.messageLabel}
               </span>
               <textarea
                 name="message"
                 rows={4}
-                placeholder="Niveau actuel, objectif, disponibilités..."
+                placeholder={t.messagePlaceholder}
                 className={`mt-2 ${field}`}
               />
             </label>
@@ -120,7 +126,7 @@ export function ServiceInquiry({ serviceSlug }: { serviceSlug: string }) {
               data-service={service}
               className="mt-2 inline-flex items-center justify-center gap-3 bg-primary px-8 py-4 font-display text-base font-semibold uppercase tracking-[0.14em] text-primary-foreground transition-colors duration-300 hover:bg-primary-glow"
             >
-              Envoyer la demande
+              {t.submit}
               <Send size={18} />
             </button>
           </form>

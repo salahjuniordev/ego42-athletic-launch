@@ -5,58 +5,32 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { BrandStatement } from "@/components/brand-statement";
 import { Method } from "@/components/method";
+import { useT } from "@/lib/i18n/context";
+import { buildRouteHead, routeMeta } from "@/lib/i18n/meta";
 
-const title = "À propos — La méthode EGO 42 | Coaching & performance humaine";
-const description =
-  "Qui est EGO 42 : une méthode de coaching sportif et de préparation physique au Cameroun, fondée sur la discipline, la technique et la performance humaine.";
 const url = "https://ego42-athletic-launch.lovable.app/a-propos";
 
 export const Route = createFileRoute("/a-propos")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: url },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: url }],
-  }),
+  head: ({ match }) => buildRouteHead(routeMeta.about, match.context.lang, { url }),
   component: AProposPage,
 });
 
-const values = [
-  {
-    t: "Une méthode, pas une salle",
-    d: "Chaque accompagnement commence par une évaluation et se construit autour d'un objectif clair, en piscine comme à sec.",
-  },
-  {
-    t: "Un encadrement humain",
-    d: "Les séances sont dirigées : correction technique, dosage de l'intensité et progression maîtrisée, du débutant au sportif confirmé.",
-  },
-  {
-    t: "Ancré au Cameroun",
-    d: "EGO 42 intervient localement, en individuel ou en petit groupe, pour les enfants, les adolescents, les adultes et les athlètes.",
-  },
-];
-
 function AProposPage() {
+  const t = useT().aboutPage;
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
       <SiteHeader />
       <main>
         <section className="border-b border-border pb-16 pt-28 sm:pt-36">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <span className="section-label">À propos</span>
+            <span className="section-label">{t.label}</span>
             <h1 className="mt-6 font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-foreground sm:text-7xl">
-              Discipline. Performance.
-              <span className="block text-primary">Potentiel humain.</span>
+              {t.titleTop}
+              <span className="block text-primary">{t.titleAccent}</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              EGO 42 est une marque de coaching sportif et de préparation physique. Notre travail :
-              apprendre à mieux bouger, développer une force utile et progresser durablement.
+              {t.intro}
             </p>
           </div>
         </section>
@@ -64,7 +38,7 @@ function AProposPage() {
         <section className="py-16 sm:py-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <div className="grid gap-px border border-border bg-border sm:grid-cols-3">
-              {values.map((v) => (
+              {t.values.map((v) => (
                 <div key={v.t} className="bg-background p-7">
                   <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-foreground">
                     {v.t}
@@ -86,7 +60,7 @@ function AProposPage() {
               data-analytics-id="apropos-programmes"
               className="group inline-flex items-center gap-2 bg-primary px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground transition-colors duration-300 hover:bg-primary-glow"
             >
-              Voir les programmes
+              {t.ctaPrograms}
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <a
@@ -94,7 +68,7 @@ function AProposPage() {
               data-analytics-id="apropos-contact"
               className="inline-flex items-center gap-2 border border-border px-7 py-4 font-display text-sm font-bold uppercase tracking-[0.16em] text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
             >
-              Nous contacter
+              {t.ctaContact}
             </a>
           </div>
         </section>

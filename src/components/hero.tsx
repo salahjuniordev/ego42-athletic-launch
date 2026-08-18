@@ -2,9 +2,11 @@ import { useState } from "react";
 import { ArrowRight, Instagram, Search, Youtube, X as XIcon } from "lucide-react";
 
 import athlete from "@/assets/athlete.png";
+import { useT } from "@/lib/i18n/context";
 
 export function Hero() {
   const [slide, setSlide] = useState(0);
+  const t = useT();
 
   return (
     <section
@@ -23,7 +25,7 @@ export function Hero() {
 
         <img
           src={athlete}
-          alt="Sprinter athlete in explosive starting stride"
+          alt={t.hero.athleteAlt}
           width={1024}
           height={1536}
           className="relative z-20 h-full max-h-full w-auto max-w-none object-contain drop-shadow-2xl transition-transform duration-700 ease-out hover:scale-[1.03]"
@@ -31,15 +33,12 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-5 z-30 max-w-md sm:bottom-12 sm:left-8 sm:max-w-lg">
-        <p className="text-base leading-relaxed text-muted-foreground">
-          Push beyond your limits. Train harder, run faster, and conquer your goals with EGO 42 —
-          performance programming for athletes who refuse to settle.
-        </p>
+        <p className="text-base leading-relaxed text-muted-foreground">{t.hero.lead}</p>
         <a
           href="#programs"
           className="group mt-6 inline-flex items-center gap-3 font-display text-xl font-black uppercase italic tracking-tight text-foreground transition-colors duration-300 hover:text-primary"
         >
-          Explore Programs
+          {t.hero.cta}
           <ArrowRight
             size={24}
             className="text-primary transition-transform duration-300 group-hover:translate-x-2"
@@ -52,7 +51,7 @@ export function Hero() {
           <button
             key={i}
             type="button"
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={t.hero.slide(i + 1)}
             aria-current={slide === i}
             onClick={() => setSlide(i)}
             className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
@@ -80,7 +79,7 @@ export function Hero() {
         <span aria-hidden className="my-2 h-16 w-px bg-border" />
         <button
           type="button"
-          aria-label="Search"
+          aria-label={t.hero.search}
           className="text-foreground transition-colors duration-300 hover:text-primary"
         >
           <Search size={18} />

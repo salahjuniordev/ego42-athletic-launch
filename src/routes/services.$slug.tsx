@@ -3,31 +3,30 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ServiceDetail } from "@/components/service-detail";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getService } from "@/lib/services-data";
+import { buildServiceHead } from "@/lib/i18n/meta";
+import { getServiceRaw } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services/$slug")({
+  // The loader stays language-independent: it returns the raw bilingual service,
+  // so a toggle never needs a loader round-trip. `head` and the component pick
+  // the active language from route context / `useLang()`.
   loader: ({ params }) => {
-    const service = getService(params.slug);
+    const service = getServiceRaw(params.slug);
     if (!service) throw notFound();
     return { service };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, match }) => {
+    const lang = match.context.lang;
     if (!loaderData) {
       return {
-        meta: [{ title: "Service introuvable — EGO 42" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: lang === "en" ? "Service not found — EGO 42" : "Service introuvable — EGO 42" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const { service } = loaderData;
-    return {
-      meta: [
-        { title: service.seoTitle },
-        { name: "description", content: service.seoDescription },
-        { property: "og:title", content: service.seoTitle },
-        { property: "og:description", content: service.seoDescription },
-        { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-    };
+    return buildServiceHead(service.seoTitle[lang], service.seoDescription[lang]);
   },
   component: ServicePage,
 });

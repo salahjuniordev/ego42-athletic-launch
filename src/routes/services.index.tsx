@@ -3,40 +3,33 @@ import { ArrowRight } from "lucide-react";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { services } from "@/lib/services-data";
-
-const title = "Services — Natation, fitness, mobilité & performance | EGO 42";
-const description =
-  "Les services EGO 42 au Cameroun : natation, fitness, mobilité & bien-être, préparation physique orientée performance et coaching personnalisé.";
+import { useLang, useT } from "@/lib/i18n/context";
+import { buildRouteHead, routeMeta } from "@/lib/i18n/meta";
+import { getServices } from "@/lib/services-data";
 
 export const Route = createFileRoute("/services/")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: ({ match }) => buildRouteHead(routeMeta.services, match.context.lang),
   component: ServicesIndex,
 });
 
 function ServicesIndex() {
+  const lang = useLang();
+  const t = useT().servicesPage;
+  const common = useT().common;
+  const services = getServices(lang);
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
       <SiteHeader />
       <main>
         <section className="border-b border-border pb-16 pt-28 sm:pt-36">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <span className="section-label">Services</span>
+            <span className="section-label">{t.label}</span>
             <h1 className="mt-6 font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-foreground sm:text-7xl">
-              Ce que nous <span className="text-primary">encadrons</span>
+              {t.titleTop} <span className="text-primary">{t.titleAccent}</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-              Cinq pôles d'encadrement, en individuel ou en petit groupe, adaptés au niveau et à
-              l'objectif de chaque personne.
+              {t.intro}
             </p>
           </div>
         </section>
@@ -72,7 +65,7 @@ function ServicesIndex() {
                       {s.cardCopy}
                     </p>
                     <span className="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.16em] text-primary">
-                      Découvrir
+                      {common.discover}
                       <ArrowRight size={16} />
                     </span>
                   </div>
