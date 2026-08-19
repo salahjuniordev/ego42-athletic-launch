@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
+import { Route as CoachEspaceRouteImport } from './routes/coach.espace'
+import { Route as CoachInscriptionRouteImport } from './routes/coach.inscription'
+import { Route as CoachsIndexRouteImport } from './routes/coachs.index'
+import { Route as CoachsIdRouteImport } from './routes/coachs.$id'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
@@ -30,6 +34,26 @@ const ProgrammesRoute = ProgrammesRouteImport.update({
   path: '/programmes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachEspaceRoute = CoachEspaceRouteImport.update({
+  id: '/coach/espace',
+  path: '/coach/espace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachInscriptionRoute = CoachInscriptionRouteImport.update({
+  id: '/coach/inscription',
+  path: '/coach/inscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachsIndexRoute = CoachsIndexRouteImport.update({
+  id: '/coachs/',
+  path: '/coachs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachsIdRoute = CoachsIdRouteImport.update({
+  id: '/coachs/$id',
+  path: '/coachs/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
@@ -45,14 +69,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/programmes': typeof ProgrammesRoute
+  '/coach/espace': typeof CoachEspaceRoute
+  '/coach/inscription': typeof CoachInscriptionRoute
+  '/coachs/$id': typeof CoachsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/coachs/': typeof CoachsIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/programmes': typeof ProgrammesRoute
+  '/coach/espace': typeof CoachEspaceRoute
+  '/coach/inscription': typeof CoachInscriptionRoute
+  '/coachs/$id': typeof CoachsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/coachs': typeof CoachsIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -60,21 +92,46 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/programmes': typeof ProgrammesRoute
+  '/coach/espace': typeof CoachEspaceRoute
+  '/coach/inscription': typeof CoachInscriptionRoute
+  '/coachs/$id': typeof CoachsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/coachs/': typeof CoachsIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/a-propos' | '/programmes' | '/services/$slug' | '/services/'
+    | '/'
+    | '/a-propos'
+    | '/programmes'
+    | '/coach/espace'
+    | '/coach/inscription'
+    | '/coachs/$id'
+    | '/services/$slug'
+    | '/coachs/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a-propos' | '/programmes' | '/services/$slug' | '/services'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/programmes'
+    | '/coach/espace'
+    | '/coach/inscription'
+    | '/coachs/$id'
+    | '/services/$slug'
+    | '/coachs'
+    | '/services'
   id:
     | '__root__'
     | '/'
     | '/a-propos'
     | '/programmes'
+    | '/coach/espace'
+    | '/coach/inscription'
+    | '/coachs/$id'
     | '/services/$slug'
+    | '/coachs/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
@@ -82,7 +139,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
   ProgrammesRoute: typeof ProgrammesRoute
+  CoachEspaceRoute: typeof CoachEspaceRoute
+  CoachInscriptionRoute: typeof CoachInscriptionRoute
+  CoachsIdRoute: typeof CoachsIdRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  CoachsIndexRoute: typeof CoachsIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -109,6 +170,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgrammesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach/espace': {
+      id: '/coach/espace'
+      path: '/coach/espace'
+      fullPath: '/coach/espace'
+      preLoaderRoute: typeof CoachEspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach/inscription': {
+      id: '/coach/inscription'
+      path: '/coach/inscription'
+      fullPath: '/coach/inscription'
+      preLoaderRoute: typeof CoachInscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coachs/': {
+      id: '/coachs/'
+      path: '/coachs'
+      fullPath: '/coachs/'
+      preLoaderRoute: typeof CoachsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coachs/$id': {
+      id: '/coachs/$id'
+      path: '/coachs/$id'
+      fullPath: '/coachs/$id'
+      preLoaderRoute: typeof CoachsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/': {
       id: '/services/'
       path: '/services'
@@ -130,7 +219,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
   ProgrammesRoute: ProgrammesRoute,
+  CoachEspaceRoute: CoachEspaceRoute,
+  CoachInscriptionRoute: CoachInscriptionRoute,
+  CoachsIdRoute: CoachsIdRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  CoachsIndexRoute: CoachsIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
