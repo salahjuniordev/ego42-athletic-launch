@@ -6,11 +6,23 @@ import type { Tables, TablesInsert, TablesUpdate } from "./types";
 
 export type CoachProfile = Tables<"coach_profiles">;
 
-/** A coach row with its joined service slugs (PostgREST embedded resource). */
-export type CoachWithServices = CoachProfile & {
+/**
+ * A coach row with its joined service slugs (PostgREST embedded resource).
+ * Contact fields are optional: anonymous visitors have no column-level SELECT
+ * grant on phone/whatsapp/public_email, so public reads omit them.
+ */
+export type CoachWithServices = Omit<CoachProfile, "phone" | "whatsapp" | "public_email"> & {
+  phone?: string;
+  whatsapp?: string;
+  public_email?: string;
   coach_services: { service_slug: string }[];
 };
 
+/** Columns readable by anonymous visitors (contact details excluded). */
+const PUBLIC_COACH_COLUMNS =
+  "id, user_id, full_name, city, bio, years_experience, certifications, availability, instagram, website, photo_path, status, created_at, updated_at";
+
+const PUBLIC_COACH_SELECT = `${PUBLIC_COACH_COLUMNS}, coach_services(service_slug)`;
 const COACH_SELECT = "*, coach_services(service_slug)";
 const PHOTO_BUCKET = "coach-photos";
 
@@ -18,7 +30,7 @@ const PHOTO_BUCKET = "coach-photos";
 export async function listApprovedCoaches(): Promise<CoachWithServices[]> {
   const { data, error } = await supabase
     .from("coach_profiles")
-    .select(COACH_SELECT)
+    .select(PUBLIC_COACH_SELECT)
     .eq("status", "approved")
     .order("created_at", { ascending: false });
 
@@ -30,7 +42,7 @@ export async function listApprovedCoaches(): Promise<CoachWithServices[]> {
 export async function getApprovedCoach(id: string): Promise<CoachWithServices | null> {
   const { data, error } = await supabase
     .from("coach_profiles")
-    .select(COACH_SELECT)
+    .select(PUBLIC_COACH_SELECT)
     .eq("id", id)
     .eq("status", "approved")
     .maybeSingle();
