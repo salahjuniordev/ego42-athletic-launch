@@ -1,4 +1,4 @@
-import logo from "@/assets/ego42-logo.png";
+import mark from "@/assets/ego42-mark.png.asset.json";
 import { useT } from "@/lib/i18n/context";
 import { navLinks } from "./site-header";
 
@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center">
         <a href="/" className="flex items-center gap-3">
           <img
-            src={logo}
+            src={mark.url}
             alt={t.footer.logoAlt}
             width={40}
             height={40}

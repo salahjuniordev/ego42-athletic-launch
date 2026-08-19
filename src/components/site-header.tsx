@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X as XIcon } from "lucide-react";
 
-import logo from "@/assets/ego42-logo.png";
+import mark from "@/assets/ego42-mark.png.asset.json";
 import { useT } from "@/lib/i18n/context";
 import { LanguageToggle } from "@/components/language-toggle";
 
@@ -11,7 +11,6 @@ export const navLinks = [
   { key: "about", href: "/a-propos" },
   { key: "services", href: "/services" },
   { key: "programs", href: "/programmes" },
-  { key: "coachs", href: "/coachs" },
   { key: "pricing", href: "/#tarifs" },
   { key: "contact", href: "/#contact" },
 ] as const;
@@ -25,7 +24,7 @@ export function SiteHeader() {
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-5 pt-5 sm:px-8">
         <a href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
           <img
-            src={logo}
+            src={mark.url}
             alt={t.header.logoAlt}
             width={48}
             height={48}
@@ -47,12 +46,6 @@ export function SiteHeader() {
                 {t.nav[link.key]}
               </a>
             ))}
-            <a
-              href="/coach/inscription"
-              className="border border-primary px-4 py-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
-            >
-              {t.directory.becomeCoachCta}
-            </a>
           </nav>
           <LanguageToggle />
           <button
@@ -82,13 +75,6 @@ export function SiteHeader() {
               {t.nav[link.key]}
             </a>
           ))}
-          <a
-            href="/coach/inscription"
-            onClick={() => setMenuOpen(false)}
-            className="mt-2 inline-block border border-primary px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-[0.14em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-          >
-            {t.directory.becomeCoachCta}
-          </a>
         </nav>
       )}
     </header>
