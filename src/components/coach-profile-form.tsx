@@ -74,6 +74,8 @@ export function CoachProfileForm({ mode, userId, initial, onSaved }: Props) {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Read the form synchronously: `currentTarget` is null after the first await.
+    const data = new FormData(e.currentTarget);
     setSubmitting(true);
     try {
       // 1. A live session is required — RLS keys writes on auth.uid().
@@ -85,7 +87,6 @@ export function CoachProfileForm({ mode, userId, initial, onSaved }: Props) {
         return;
       }
 
-      const data = new FormData(e.currentTarget);
       const val = (k: string) => String(data.get(k) ?? "").trim();
       const yearsRaw = Number(data.get("years_experience"));
       const years = Number.isFinite(yearsRaw) && yearsRaw > 0 ? Math.floor(yearsRaw) : 0;
