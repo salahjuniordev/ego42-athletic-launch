@@ -106,6 +106,16 @@ export const routeMeta = {
       en: "EGO 42 services in Cameroon: swimming, fitness, mobility & wellbeing, performance-oriented physical preparation and personalized coaching.",
     },
   },
+  coachs: {
+    title: {
+      fr: "Coachs — Trouvez votre coach EGO 42 | Annuaire",
+      en: "Coaches — Find your EGO 42 coach | Directory",
+    },
+    description: {
+      fr: "Découvrez les coachs EGO 42 au Cameroun : filtrez par service et par ville, puis contactez directement le coach qui vous correspond.",
+      en: "Discover EGO 42 coaches in Cameroon: filter by service and city, then reach out directly to the coach who fits you.",
+    },
+  },
 } satisfies Record<string, RouteMetaEntry>;
 
 export function buildRouteHead(
@@ -139,6 +149,28 @@ export function buildServiceHead(seoTitle: string, seoDescription: string) {
       { property: "og:title", content: seoTitle },
       { property: "og:description", content: seoDescription },
       { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  };
+}
+
+/** Localized <head> for a coach detail page (og:type=profile). */
+export function buildCoachHead(name: string, lang: Lang) {
+  const title =
+    lang === "fr"
+      ? `${name} — Coach EGO 42`
+      : `${name} — EGO 42 coach`;
+  const description =
+    lang === "fr"
+      ? `Découvrez le profil de ${name}, coach de l'annuaire EGO 42 : services, expérience et coordonnées.`
+      : `Discover ${name}'s profile, a coach in the EGO 42 directory: services, experience and contact details.`;
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "profile" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   };
