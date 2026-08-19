@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X as XIcon } from "lucide-react";
 
-import logo from "@/assets/ego42-logo.png";
+import logo from "@/assets/mario-ego42-logo.png.asset.json";
 import { useT } from "@/lib/i18n/context";
 import { LanguageToggle } from "@/components/language-toggle";
 
@@ -23,17 +23,14 @@ export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 px-5 pt-5 sm:px-8">
-        <a href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
+        <a href="/" className="flex min-w-0 items-center">
           <img
-            src={logo}
+            src={logo.url}
             alt={t.header.logoAlt}
-            width={48}
-            height={48}
-            className="h-9 w-9 shrink-0 object-contain sm:h-12 sm:w-12"
+            width={220}
+            height={220}
+            className="h-14 w-auto shrink-0 object-contain sm:h-20"
           />
-          <span className="truncate font-display text-2xl font-black italic uppercase tracking-tight text-foreground sm:text-3xl">
-            EGO<span className="text-primary"> 42</span>
-          </span>
         </a>
 
         <div className="flex items-center gap-4 sm:gap-6">
