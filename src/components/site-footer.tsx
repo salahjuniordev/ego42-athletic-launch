@@ -1,4 +1,4 @@
-import logo from "@/assets/ego42-logo.png";
+import logo from "@/assets/mario-ego42-logo.png.asset.json";
 import { useT } from "@/lib/i18n/context";
 import { navLinks } from "./site-header";
 
@@ -7,18 +7,15 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border py-10">
       <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:items-center">
-        <a href="/" className="flex items-center gap-3">
+        <a href="/" className="flex items-center">
           <img
-            src={logo}
+            src={logo.url}
             alt={t.footer.logoAlt}
-            width={40}
-            height={40}
+            width={220}
+            height={220}
             loading="lazy"
-            className="h-9 w-9 object-contain"
+            className="h-20 w-auto shrink-0 rounded-2xl object-contain"
           />
-          <span className="font-display text-xl font-black uppercase italic tracking-tight text-foreground">
-            EGO<span className="text-primary"> 42</span>
-          </span>
         </a>
 
         <nav className="flex flex-wrap gap-x-8 gap-y-3 lg:col-span-2 lg:justify-end">

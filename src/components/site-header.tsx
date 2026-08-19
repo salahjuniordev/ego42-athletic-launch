@@ -29,7 +29,7 @@ export function SiteHeader() {
             alt={t.header.logoAlt}
             width={220}
             height={220}
-            className="h-14 w-auto shrink-0 object-contain sm:h-20"
+            className="h-20 w-auto shrink-0 rounded-2xl object-contain"
           />
         </a>
 
